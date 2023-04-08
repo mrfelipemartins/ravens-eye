@@ -2,6 +2,17 @@
 
 Raven's Eye is a simple Node.js app that allows you to receive and inspect webhooks for debugging purposes. It is built using Express, Socket.IO, and Bootstrap.
 
+<table border="0">
+  <tr>
+    <td>
+      <img src="https://i.imgur.com/EFQXl3g.png" alt="Image 1" width="50%" />
+    </td>
+    <td>
+      <img src="https://i.imgur.com/64Lg7ge.png" alt="Image 2" width="50%" />
+    </td>
+  </tr>
+</table>
+
 ## Features
 
 - Receive webhooks at the `/webhook` endpoint
