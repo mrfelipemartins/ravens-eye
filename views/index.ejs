@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raven's Eye</title>
+  <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" ></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Raven's Eye</h1>
+    <p>Send your webhooks to <code>/webhook</code> endpoint.</p>
+    <h2>Received Requests:</h2>
+    <button class="btn btn-danger mb-4" id="clear-requests">Clear Requests</button>
+    <ul class="list-group" id="request-list">
+        <% requests.forEach((request) => { %>
+          <li class="list-group-item">
+            <a href="/request/<%= request.id %>"><%= request.timestamp %> - <%= request.method %></a>
+          </li>
+        <% }) %>
+      </ul>
+  </div>
+  <script>
+    const socket = io();
+    const requestList = document.getElementById('request-list');
+    const clearRequestsButton = document.getElementById('clear-requests');
+    socket.on('new_request', (request) => {
+      const listItem = document.createElement('li');
+      listItem.classList.add('list-group-item');
+      listItem.innerHTML = `<a href="/request/${request.id}">${request.timestamp} - ${request.method}</a>`;
+        requestList.insertBefore(listItem, requestList.firstChild);
+    });
+    
+    socket.on('clear_requests', () => {
+      requestList.innerHTML = '';
+    });
+
+    clearRequestsButton.addEventListener('click', async () => {
+      try {
+        await fetch('/clear', { method: 'POST' });
+        socket.emit('clear_requests');
+      } catch (error) {
+        console.error('Error clearing requests:', error);
+      }
+    });
+    </script>
+</body>
+</html>

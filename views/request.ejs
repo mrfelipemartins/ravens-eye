@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Request Details</h1>
+    <h2>Timestamp</h2>
+    <p><%= request.timestamp %></p>
+    <h2>Method</h2>
+    <p><%= request.method %></p>
+    <h2>Headers</h2>
+    <pre><%= JSON.stringify(request.headers, null, 2) %></pre>
+    <h2>Body</h2>
+    <pre><%= JSON.stringify(request.body, null, 2) %></pre>
+    <a href="/" class="btn btn-primary">Go back</a>
+  </div>
+</body>
+</html>
